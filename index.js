@@ -28,6 +28,8 @@ async function run() {
   try {
     await client.connect();
     const allVisaCollection = client.db('userCollection').collection('visaApplication');
+    const visaUser = client.db('userCollection').collection('visaApplyUser');
+    
     app.get('/visaApplication/:id',async(req,res)=>{
       const id = req.params.id;
       const query = {_id : new ObjectId(id)};
@@ -48,6 +50,11 @@ async function run() {
       const newVisa = req.body;
       const result = await allVisaCollection.insertOne(newVisa);
       res.send(result);
+    })
+    app.post('/visaUser',async(req,res)=>{
+      const newUser = req.body;
+      const result = await visaUser.insertOne(newUser);
+      res.send(result)
     })
   
   } finally {
