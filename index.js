@@ -26,10 +26,24 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    await client.connect();
+    // await client.connect();
     const allVisaCollection = client.db('userCollection').collection('visaApplication');
     const visaUser = client.db('userCollection').collection('visaApplyUser');
-    
+    const myVisa = client.db('userCollection').collection('myVisaApplication');
+
+
+    app.get('/myAppliedVisa',async(req,res)=>{
+    const cursor = myVisa.find()
+        const result = await cursor.toArray();
+        res.send(result)
+    })
+
+
+    app.get('/visaUser',async(req,res)=>{
+        const cursor = visaUser.find()
+        const result = await cursor.toArray();
+        res.send(result)
+    })
     app.get('/visaApplication/:id',async(req,res)=>{
       const id = req.params.id;
       const query = {_id : new ObjectId(id)};
@@ -46,8 +60,14 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result)
     })
+    app.post('/myAppliedVisa',async(req,res)=>{
+      const myApply = req.body;
+      const result = await myVisa.insertOne(myApply);
+      res.send(result)
+    })
     app.post('/visaApplication',async(req,res)=>{
       const newVisa = req.body;
+      console.log(newVisa)
       const result = await allVisaCollection.insertOne(newVisa);
       res.send(result);
     })
