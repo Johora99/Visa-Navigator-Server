@@ -94,7 +94,6 @@ async function run() {
 
     app.post('/visaApplication',async(req,res)=>{
       const newVisa = req.body;
-      console.log(newVisa)
       const result = await allVisaCollection.insertOne(newVisa);
       res.send(result);
     })
