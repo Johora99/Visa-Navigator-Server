@@ -37,10 +37,16 @@ async function run() {
         const result = await cursor.toArray();
         res.send(result)
     })
-    app.get('/myAppliedVisa/:id',async(req,res)=>{
+    app.get('/myAppliedVisa/byId/:id',async(req,res)=>{
       const id = req.params.id;
       const query = {_id : new ObjectId(id)};
       const result = await myVisa.findOne(query);
+      res.send(result)
+    })
+    app.get('/myAppliedVisa/byEmail/:email',async(req,res)=>{
+        const email = req.params.email;
+      const query = {email : email};
+      const result = await myVisa.find(query).toArray();
       res.send(result)
     })
 
