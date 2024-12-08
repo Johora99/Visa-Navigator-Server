@@ -56,6 +56,18 @@ async function run() {
         const result = await cursor.toArray();
         res.send(result)
     })
+    app.get('/visaUser/byEmail/:email',async(req,res)=>{
+          const email = req.params.email;
+          const query = {"visaData.email": email};
+          const result = await visaUser.find(query).toArray();
+        res.send(result)
+    })
+    app.get('/visaUser/byId/:id',async(req,res)=>{
+            const id = req.params.id;
+          const query = {_id : new ObjectId(id)};
+          const result = await visaUser.findOne(query);
+        res.send(result)
+    })
 
 
     app.get('/visaApplication/byId/:id',async(req,res)=>{
@@ -146,11 +158,12 @@ async function run() {
      })
 
 
-     app.delete('/myAppliedVisa/:id',async(req,res)=>{
+     app.delete('/visaUser/byId/:id',async(req,res)=>{
       const id = req.params.id;
       const query = {_id : new ObjectId(id)};
-      const result = await myVisa.deleteOne(query);
-      res.send(result)
+      const result = await visaUser.deleteOne(query);
+         res.send(result)
+    
       
      })
 
