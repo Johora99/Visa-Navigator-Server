@@ -44,5 +44,22 @@ https://server-side-tawny.vercel.app/myAppliedVisa
 - Visa Information base on id
 https://server-side-tawny.vercel.app/visaApplication/byId/6750852fd5f341d69c3461bf
 
+### Backend Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Johora99/Visa-Navigator-Server.git
+   cd Visa-Navigator
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   nodemon index.js
+   ```
 ## Live Link
 https://deluxe-dasik-5cbf3d.netlify.app/
